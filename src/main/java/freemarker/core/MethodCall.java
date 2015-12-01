@@ -62,8 +62,12 @@ final class MethodCall extends Expression {
             targetMethod instanceof TemplateMethodModelEx
             ? arguments.getModelList(env)
             : arguments.getValueList(env);
-            Object result = targetMethod.exec(argumentStrings);
-            return env.getObjectWrapper().wrap(result);
+            try {
+                Object result = targetMethod.exec(argumentStrings);
+                return env.getObjectWrapper().wrap(result);
+            } catch (Exception e) {
+                throw new TemplateException(target.toString() + " : " + argumentStrings, e, env);
+            }
         } else if (targetModel instanceof Macro) {
             Macro func = (Macro) targetModel;
             env.setLastReturnValue(null);
