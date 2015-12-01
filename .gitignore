@@ -4,6 +4,8 @@
 /build.properties
 /archive/
 /ide-dependencies/
+.idea/
+FreeMarker-2.3-gae.iml
 
 src/manual/book.xml~
 
